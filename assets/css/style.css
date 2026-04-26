@@ -1,0 +1,942 @@
+@font-face {
+  font-family: "BalooRegular";
+  src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brandey";
+  src: url("../../fonts/Brandey-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiBold";
+  src: url("../../fonts/NotoSansGujarati-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiRegular";
+  src: url("../../fonts/NotoSansGujarati-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MPLUSRounded";
+  src: url("../../fonts/MPLUSRounded1c-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100vw !important;
+  height: 100%;
+  background-image: url("../images/bg-img.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  opacity: 1;
+  font-family: "BalooRegular";
+  transition: opacity 0.5s ease;
+}
+
+.home-btn {
+  position: fixed;
+  top: 2.5vw;
+  left: 4%;
+  width: 3.5vw;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  transform: scale(1.15);
+}
+
+.home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.language-container {
+  position: fixed;
+  top: 2.5vw;
+  right: 5%;
+  display: flex;
+  width: 9vw;
+  padding: 0.2vw 0.3vw;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "BalooRegular";
+  border: 0.2vw solid #FFB44A;
+  background-color: transparent;
+  border-radius: 50vw;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.language-container div {
+  width: 2.5vw;
+  height: 2.5vw;
+  font-size: 1.6vw;
+  text-align: center;
+  border: 0.2vw solid #FFB44A;
+  background: transparent !important;
+  color: #FFB44A;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-family: "BalooRegular", sans-serif;
+}
+
+.language-container div:hover {
+  background-color: white !important;
+  color: #FFB44A;
+}
+
+.language-container div.active {
+  background-color: white !important;
+  color: #FFB44A;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .left-container,
+main .right-container {
+  position: relative;
+  width: 28%;
+  height: 100%;
+}
+
+main .center-container {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  z-index: 1000;
+  /* background-color: yellow; */
+}
+
+.center-container .outer-layer,
+.center-container .inner-layer,
+.center-container .circle,
+.center-container .page-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-container .outer-layer {
+  width: 58vw;
+}
+
+.center-container .inner-layer {
+  width: 54vw;
+}
+
+.center-container .outer-layer img,
+.center-container .inner-layer img {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.center-container .circle {
+  width: 30vw;
+  height: 30vw;
+  border-radius: 50%;
+  outline: 1vw solid #FFB44A;
+  border: 1vw solid #7B1EB2;
+  background-color: white;
+  overflow: hidden;
+}
+
+.circle-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.circle-video.show {
+  opacity: 1;
+}
+
+.page-title {
+  /* width: 50vw; */
+  height: auto;
+  text-align: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease;
+  transform: translateX(-50%);
+}
+
+.page-title span {
+  font-size: 6vw;
+  text-align: center;
+  color: #FF2F95;
+  font-family: "Brandey";
+  display: block;
+  line-height: 1;
+}
+
+
+.click {
+  position: absolute;
+  top: 68%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  overflow: hidden;
+  padding: 0.1vw 2vw;
+  border: transparent;
+  border-radius: 3vw;
+  background-color: #FF2F95;
+  font-family: "MPLUSRounded";
+  margin-top: 1vw;
+  font-size: 2.5vw;
+  cursor: pointer;
+  font-weight: 700 !important;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    color 0.4s ease;
+  z-index: 1000;
+  color: white !important;
+  box-shadow: 0 0.4vw 0.2vw rgba(10, 10, 10, 0.643);
+}
+
+.click::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 250%;
+  width: 140%;
+  height: 220%;
+  background-color: #B764D9;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: top 0.45s ease;
+  z-index: -1;
+}
+
+.click:hover::before {
+  top: -35%;
+}
+
+.click:hover {
+  color: white !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+main .left-container,
+main .right-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 3vw;
+  align-content: center;
+  flex-direction: column;
+}
+
+.left-container .box,
+.right-container .box {
+  position: relative;
+  width: 20vw;
+  height: 4vw;
+  border: 0.3vw solid #FFAE3C;
+  border-radius: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+  cursor: pointer;
+}
+
+.left-container .box .puja,
+.right-container .box,
+.puja {
+  color: white;
+  font-size: 2vw;
+  transition: color 0.4s ease;
+}
+
+.left-container .box {
+  background: linear-gradient(90deg,
+      #FF1F8E 0%,
+      #FF6CB4 90%,
+      #ffffff 100%);
+}
+
+.right-container .box {
+  background: linear-gradient(90deg,
+      #ffffff 0%,
+      #FF6CB4 10%,
+      #FF1F8E 100%);
+}
+
+.left-container .box-1,
+.left-container .box-4 {
+  left: 15%;
+}
+
+.left-container .box-2,
+.left-container .box-3 {
+  left: 6%;
+}
+
+.left-container .box .puja {
+  width: 100%;
+  padding-right:3vw;
+  text-align: center;
+}
+
+.right-container .box .puja {
+  width: 100%;
+  padding-left:3vw;
+  text-align: center;
+}
+
+.right-container .box-5,
+.right-container .box-8 {
+  left: 14%;
+}
+
+.right-container .box-6,
+.right-container .box-7 {
+  left: 22%;
+}
+
+.left-container .num,
+.right-container .num {
+  position: absolute;
+
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  background-color: white;
+  border: 0.4vw solid #FFAE3C;
+  color: #FF1F8E;
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+}
+
+.left-container .box:hover,
+.right-container .box:hover {
+  background: white !important;
+}
+
+.left-container .box:hover .puja,
+.right-container .box:hover .puja {
+  color: #ff2f95 !important;
+}
+
+.left-container .box:hover .num,
+.right-container .box:hover .num {
+  transform: scale(1.15);
+}
+
+.left-container .num {
+  right: -3%;
+}
+
+.right-container .num {
+  left: -3%;
+}
+
+.bottom-layer {
+  position: absolute;
+  top: 92%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3vw;
+  transition: opacity 0.5s ease;
+  z-index: 1500;
+}
+
+.bottom-layer.hide-bottom {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bottom-layer .box {
+  width: 50%;
+  height: 4vw;
+  border: 0.2vw solid #FFAE3C;
+  border-radius: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-layer .box-9 {
+  position: relative;
+  background: linear-gradient(90deg,
+      #8F23C0 0%,
+      #FF6CB4 90%,
+      #ffffff 100%);
+}
+
+.box-9 .play-btn {
+  right: -3%;
+  transform: translateX(-505);
+}
+
+.box-10 .play-btn {
+  left: -3%;
+}
+
+.bottom-layer .box span {
+  width: 100%;
+  padding: 0 2vw;
+}
+
+.bottom-layer .box-10 {
+  position: relative;
+  background: linear-gradient(90deg,
+      #ffffff 0%,
+      #FF6CB4 10%,
+      #8F23C0 100%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.bottom-layer .box-9 span {
+  text-align: left;
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+
+.bottom-layer .box-10 span {
+  text-align: right;
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  width: 5vw;
+  height: 5vw;
+  background-color: white;
+  border: 0.4vw solid #FFAE3C;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%) scale(1);
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.play-btn-outer {
+  width: 3.5vw;
+  height: 3.5vw;
+  background-color: white;
+  border: 0.2vw solid #FFAE3C;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.puja-video-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 10000;
+}
+
+.puja-video-btn .outer-layer,
+.puja-video-btn .inner-layer,
+.puja-video-btn img {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.left-container .box.active-puja,
+.right-container .box.active-puja {
+  background: white !important;
+}
+
+.left-container .box.active-puja .puja,
+.right-container .box.active-puja .puja {
+  color: #ff2f95 !important;
+}
+
+
+.play-btn-inner {
+  border-radius: 50%;
+  background-color: #FFAE3C;
+  width: 2.5vw;
+  height: 2.5vw;
+  padding: 0.7vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+  flex-shrink: 0;
+}
+
+.play-btn-inner img {
+  width: 100%;
+  display: flex;
+  object-fit: contain;
+}
+
+.bottom-layer .box-9,
+.bottom-layer .box-10 {
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.bottom-layer .box-9:hover,
+.bottom-layer .box-10:hover {
+  background: white !important;
+}
+
+.bottom-layer .box:hover .play-btn-inner {
+  background: #835EF4 !important;
+}
+
+.bottom-layer .box-9:hover .play-btn,
+.bottom-layer .box-10:hover .play-btn {
+  transform: translateY(-50%) scale(1.16);
+}
+
+.bottom-layer .box-9:hover span,
+.bottom-layer .box-10:hover span {
+  color: #FF1F8E
+}
+
+body.video-open .home-btn,
+body.video-open .language-container,
+body.video-open .left-container,
+body.video-open .center-container,
+body.video-open .right-container {
+  filter: blur(0.5vw);
+  pointer-events: none;
+}
+
+
+.bottom-layer .box-9.active-video,
+.bottom-layer .box-10.active-video {
+  background: white !important;
+}
+
+.bottom-layer .box-9.active-video span,
+.bottom-layer .box-10.active-video span {
+  color: #ff1f8e;
+}
+
+.video-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-popup.active {
+  display: flex;
+}
+
+.video-box {
+  width: 55vw;
+  height: 31vw;
+  background: white;
+  border: 0.35vw solid #ffae3c;
+  border-radius: 2vw;
+  overflow: hidden;
+  box-shadow: 0 0 2vw rgba(0, 0, 0, 0.35);
+}
+
+.video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-close {
+  position: absolute;
+  top: 10%;
+  right: 20%;
+  width: 3.5vw;
+  height: 3.5vw;
+  border-radius: 50%;
+  border: 0.25vw solid transparent;
+  background: #FF1F8E;
+  color: #ffae3c;
+  font-size: 2.5vw;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 100000;
+  transition: background 0.3s ease-in-out;
+}
+
+.video-close:hover {
+  background: white !important;
+}
+
+.video-popup {
+  pointer-events: none;
+}
+
+.video-box,
+.video-close {
+  pointer-events: auto;
+}
+
+body.video-open .bottom-layer {
+  z-index: 100000;
+  pointer-events: auto;
+}
+
+body.video-open .bottom-layer .box,
+body.video-open .bottom-layer .play-btn,
+body.video-open .bottom-layer .play-btn-inner {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+body.video-open .bottom-layer .box:hover .play-btn-inner {
+  background: #835ef4 !important;
+}
+
+body.video-open .bottom-layer .box:hover .play-btn {
+  transform: translateY(-50%) scale(1.16);
+}
+
+.puja-video-btn {
+  position: absolute;
+  top: 90%;
+  border-radius: 3vw;
+  width: 12vw;
+  height: 4vw;
+  border: 0.2vw solid white;
+  background-color: #B764D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10vw);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.puja-video-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.puja-video-btn .outer-layer {
+  position: absolute;
+  width: 3vw;
+  height: 3vw;
+  left: 50%;
+  top: -55%;
+  transform: translateX(-50%);
+  background-color: #FFAE3C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.puja-video-btn .outer-layer .inner-layer {
+  width: 2.4vw;
+  height: 2.4vw;
+  top: -5%;
+  border: 0.2vw solid white;
+  background-color: transparent;
+  padding: 0.2vw;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.puja-video-btn .outer-layer .inner-layer img {
+  width: 50%;
+  display: block;
+  object-fit: contain;
+}
+
+.puja-video-btn span {
+  color: white;
+  font-size: 1.5vw;
+}
+
+/* Initial hidden state */
+.home-btn,
+.language-container,
+.left-container,
+.right-container,
+.bottom-layer,
+.puja-video-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Left and right containers start from center */
+.left-container {
+  transform: translateX(50%);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.right-container {
+  transform: translateX(-50%);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.center-container .outer-layer,
+.center-container .inner-layer {
+  transition: transform 0.8s ease;
+  transform-origin: center center;
+}
+
+/* Show after click */
+body.intro-open .home-btn,
+body.intro-open .language-container,
+body.intro-open .left-container,
+body.intro-open .right-container,
+body.intro-open .bottom-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.intro-open .left-container,
+body.intro-open .right-container {
+  transform: translateX(0);
+}
+
+body.intro-open .click {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Keep puja video button hidden until puja box click */
+body.intro-open .puja-video-btn {
+  pointer-events: none;
+}
+
+body.intro-open .puja-video-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* FIX: hide bottom layer after left/right box click */
+body.intro-open .bottom-layer.hide-bottom {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none !important;
+}
+
+.box-8 {
+  overflow: visible;
+}
+
+.center-container .outer-layer,
+.center-container .inner-layer,
+.center-container .outer-layer img,
+.center-container .inner-layer img {
+  pointer-events: none;
+}
+
+.pranam-arrow-btn {
+  position: absolute;
+  right: 1vw;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  border-radius: 50%;
+  color: #ffae3c;
+  font-size: 1.8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 50;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  animation: arrowPop 0.7s ease-in-out infinite;
+}
+
+.pranam-arrow-btn:hover {
+  transform: translateY(-50%) scale(1.25);
+}
+
+.box-8.active-puja .pranam-arrow-btn {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@keyframes arrowPop {
+
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+
+  50% {
+    transform: translateY(-50%) scale(1.18);
+  }
+}
+
+
+
+/* 835EF4 */
+
+.pranam-container {
+  position: absolute;
+  width: 45vw;
+  height: auto;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pranam-container>.pranam-img {
+  position: relative;
+  width: 85%;
+  height: auto;
+  display: block;
+}
+
+.pranam-container>.pranam-img>img {
+  width: 100%;
+  display: block;
+}
+
+.pranam-img span {
+  z-index: 15;
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  font-size: 3.4vw;
+  transform: translateX(-50%);
+  font-family: "BalooRegular";
+  color: #B764D9;
+}
+
+.pranam-container .home-btn-1 {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 15vw;
+  height: auto;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+.pranam-container .home-btn-1:hover {
+  transform: translateX(-50%) scale(1.5);
+}
+
+.pranam-container .home-btn-1 img {
+  width: 100%;
+  display: block;
+}
+
+.home-btn-1 span {
+  z-index: 15;
+  position: absolute;
+  top: 45%;
+  left: 38%;
+  font-size: 2.5vw;
+  transform: translateY(-50%);
+  font-family: "BalooRegular";
+  color: #ffae3c;
+}
+
+.back-btn {
+  position: absolute;
+  left: 4%;
+  top: 4%;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.back-btn i {
+  color: #ffae3c;
+  font-size: 3vw;
+  transition: font-size 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.15);
+}

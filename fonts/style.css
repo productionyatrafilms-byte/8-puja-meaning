@@ -1,0 +1,362 @@
+@font-face {
+  font-family: "BalooRegular";
+  src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brandey";
+  src: url("../../fonts/Brandey-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiBold";
+  src: url("../../fonts/NotoSansGujarati-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansGujaratiRegular";
+  src: url("../../fonts/NotoSansGujarati-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100vw !important;
+  height: 100%;
+  background-image: url("../images/bg-img.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  opacity: 1;
+  font-family: "BalooRegular";
+  transition: opacity 0.5s ease;
+}
+
+.home-btn {
+  position: fixed;
+  top: 2.5vw;
+  left: 4%;
+  width: 3.5vw;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  transform: scale(1.15);
+}
+
+.home-btn img {
+  width: 100%;
+  display: block;
+}
+
+.language-container {
+  position: fixed;
+  top: 2.5vw;
+  right: 5%;
+  display: flex;
+  width: 9vw;
+  padding: 0.2vw 0.3vw;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "BalooRegular";
+  border: 0.2vw solid #FFB44A;
+  background-color: transparent;
+  border-radius: 50vw;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.language-container div {
+  width: 2.5vw;
+  height: 2.5vw;
+  font-size: 1.6vw;
+  text-align: center;
+  border: 0.2vw solid #FFB44A;
+  background: transparent !important;
+  color: #FFB44A;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-family: "BalooRegular", sans-serif;
+}
+
+.language-container div:hover {
+  background-color: white !important;
+  color: #FFB44A;
+}
+
+.language-container div.active {
+  background-color: white !important;
+  color: #FFB44A;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .left-container,
+main .right-container {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  background-color: red;
+}
+
+main .center-container {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  /* background-color: yellow; */
+}
+
+.center-container .outer-layer,
+.center-container .inner-layer,
+.center-container .circle,
+.center-container .page-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-container .outer-layer {
+  width: 62vw;
+}
+
+.center-container .inner-layer {
+  width: 58vw;
+}
+
+.center-container .outer-layer img,
+.center-container .inner-layer img {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.center-container .circle {
+  width: 32vw;
+  height: 32vw;
+  border-radius: 50%;
+  outline: 1vw solid #FFB44A;
+  border: 1vw solid #7B1EB2;
+  background-color: white;
+}
+
+.page-title {
+  /* width: 50vw; */
+  height: auto;
+  text-align: center;
+  z-index: 10000;
+  transition: opacity 3s ease;
+  transform: translateX(-50%);
+}
+
+.page-title span {
+  font-size: 6vw;
+  text-align: center;
+  color: #FF2F95;
+  font-family: "Brandey";
+  display: block;
+  line-height: 1;
+}
+
+
+.click {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  overflow: hidden;
+  padding: 0.7vw 2.4vw;
+  border: transparent;
+  border-radius: 3vw;
+  background-color: #FF2F95;
+  font-family: "MPLUSRounded";
+  margin-top: 1vw;
+  font-size: 2.2vw;
+  cursor: pointer;
+  font-weight: 700 !important;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    color 0.4s ease;
+  z-index: 1000;
+  color: white !important;
+  box-shadow: 0 0.4vw 0.2vw rgba(10, 10, 10, 0.643);
+}
+
+.click::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 250%;
+  width: 140%;
+  height: 220%;
+  background-color: #B764D9;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: top 0.45s ease;
+  z-index: -1;
+}
+
+.click:hover::before {
+  top: -35%;
+}
+
+.click:hover {
+  color: white !important;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pranam-container {
+  position: absolute;
+  width: 45vw;
+  height: auto;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pranam-container>.pranam-img {
+  position: relative;
+  width: 85%;
+  height: auto;
+  display: block;
+}
+
+.pranam-container>.pranam-img>img {
+  width: 100%;
+  display: block;
+}
+
+.pranam-img span {
+  z-index: 15;
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  font-size: 3.4vw;
+  transform: translateX(-50%);
+  font-family: "BalooRegular";
+  color: #802922;
+}
+
+.pranam-container .home-btn-1 {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 15vw;
+  height: auto;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+.pranam-container .home-btn-1:hover {
+  transform: translateX(-50%) scale(1.5);
+}
+
+.pranam-container .home-btn-1 img {
+  width: 100%;
+  display: block;
+}
+
+.home-btn-1 span {
+  z-index: 15;
+  position: absolute;
+  top: 45%;
+  left: 38%;
+  font-size: 2.5vw;
+  transform: translateY(-50%);
+  font-family: "BalooRegular";
+  color: #821b00;
+}
+
+.back-btn {
+  position: absolute;
+  left: 4%;
+  top: 4%;
+  width: 3vw;
+  height: 3vw;
+  background-color: #802922;
+  border: 0.25vw solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.back-btn i {
+  color: white;
+  font-size: 1vw;
+  transition: font-size 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  background-color: white;
+}
+
+.back-btn:hover i {
+  font-size: 1.2vw;
+  color: #802922 !important;
+}

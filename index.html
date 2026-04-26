@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang-key="title"></title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <a class="home-button home-btn" href="javascript:void(0)">
+      <img src="./assets/images/home-btn.png" alt="" />
+    </a>
+    <!-- <div class="page-title">
+      <span data-lang-key="title"></span>
+    </div> -->
+    <!-- nav-container -->
+    <div class="language-container">
+      <div class="english active">E</div>
+      <div class="hindi">H</div>
+      <div class="gujrati">G</div>
+    </div>
+
+    <main>
+      <div class="left-container">
+        <div class="box box-1">
+          <span class="puja puja-1" data-lang-key="puja-1"></span>
+          <span class="num num-1" data-lang-key="num-1"></span>
+        </div>
+        <div class="box box-2">
+          <span class="puja puja-2" data-lang-key="puja-2"></span>
+          <span class="num num-2" data-lang-key="num-2"></span>
+        </div>
+        <div class="box box-3">
+          <span class="puja puja-3" data-lang-key="puja-3"></span>
+          <span class="num num-3" data-lang-key="num-3"></span>
+        </div>
+        <div class="box box-4">
+          <span class="puja puja-4" data-lang-key="puja-4"></span>
+          <span class="num num-4" data-lang-key="num-4"></span>
+        </div>
+      </div>
+
+      <div class="center-container">
+        <div class="outer-layer">
+          <img src="./assets/images/orange-flower.png" alt="" />
+        </div>
+        <div class="inner-layer">
+          <img src="./assets/images/pink-flower.png" alt="" />
+        </div>
+        <div class="circle">
+          <div class="page-title">
+            <span data-lang-key="title"></span>
+          </div>
+          <video class="circle-video" muted playsinline></video>
+        </div>
+        <button class="click" data-lang-key="click">click</button>
+      </div>
+
+      <div class="right-container">
+        <div class="box box-5">
+          <span class="puja puja-5" data-lang-key="puja-5"></span>
+          <span class="num num-5" data-lang-key="num-5"></span>
+        </div>
+        <div class="box box-6">
+          <span class="puja puja-6" data-lang-key="puja-6"></span>
+          <span class="num num-6" data-lang-key="num-6"></span>
+        </div>
+        <div class="box box-7">
+          <span class="puja puja-7" data-lang-key="puja-7"></span>
+          <span class="num num-7" data-lang-key="num-7"></span>
+        </div>
+        <div class="box box-8">
+          <span class="puja puja-8" data-lang-key="puja-8"></span>
+          <span class="num num-8" data-lang-key="num-8"></span>
+          <i class="fa-solid fa-angles-right pranam-arrow-btn"></i>
+        </div>
+      </div>
+
+      <div class="bottom-layer">
+        <div class="box box-9">
+          <span class="puja puja-9" data-lang-key="chamar-puja"></span>
+          <div class="play-btn">
+            <div class="play-btn-outer">
+              <div class="play-btn-inner">
+                <img src="./assets/images/play-btn.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box box-10">
+          <div class="play-btn">
+            <div class="play-btn-outer">
+              <div class="play-btn-inner">
+                <img src="./assets/images/play-btn.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <span class="puja puja-10" data-lang-key="darpan-puja"></span>
+        </div>
+      </div>
+
+      <div class="puja-video-btn">
+        <div class="outer-layer">
+          <div class="inner-layer">
+            <img src="./assets/images/play-btn.png" alt="" />
+          </div>
+        </div>
+        <span>Puja</span>
+      </div>
+    </main>
+    <div class="video-popup">
+      <button class="video-close">×</button>
+
+      <div class="video-box">
+        <video controls playsinline></video>
+      </div>
+    </div>
+    <script src="./assets/js/app.js"></script>
+    <script>
+      const box9 = document.querySelector(".box-9");
+      const box10 = document.querySelector(".box-10");
+
+      const videoPopup = document.querySelector(".video-popup");
+      const closeVideo = document.querySelector(".video-close");
+      const video = document.querySelector(".video-box video");
+
+      const bottomLayer = document.querySelector(".bottom-layer");
+      const pageTitle = document.querySelector(".page-title");
+      const pujaVideoBtn = document.querySelector(".puja-video-btn");
+      const pujaVideoBtnSpan = document.querySelector(".puja-video-btn span");
+      const circleVideo = document.querySelector(".circle-video");
+      const clickBtn = document.querySelector(".click");
+      const pranamArrowBtn = document.querySelector(".pranam-arrow-btn");
+      const homeBtn = document.querySelector(".home-btn");
+
+      const orangeFlower = document.querySelector(
+        ".center-container .outer-layer",
+      );
+      const pinkFlower = document.querySelector(
+        ".center-container .inner-layer",
+      );
+
+      const videoSources = {
+        box9: "./assets/videos/chamar-puja.mp4",
+        box10: "./assets/videos/darpan-puja.mp4",
+      };
+
+      let activeBox = null;
+      let currentCircleVideoSrc = "";
+      let pinkRotation = 0;
+      let orangeRotation = 0;
+
+      function rotateFlowers(pinkDeg, orangeDeg) {
+        pinkRotation += pinkDeg;
+        orangeRotation += orangeDeg;
+
+        if (pinkFlower) {
+          pinkFlower.style.transform = `translate(-50%, -50%) rotate(${pinkRotation}deg)`;
+        }
+
+        if (orangeFlower) {
+          orangeFlower.style.transform = `translate(-50%, -50%) rotate(${orangeRotation}deg)`;
+        }
+      }
+
+      function resetFlowerRotation() {
+        pinkRotation = 0;
+        orangeRotation = 0;
+
+        if (pinkFlower) {
+          pinkFlower.style.transform = "translate(-50%, -50%) rotate(0deg)";
+        }
+
+        if (orangeFlower) {
+          orangeFlower.style.transform = "translate(-50%, -50%) rotate(0deg)";
+        }
+      }
+
+      if (clickBtn) {
+        clickBtn.addEventListener("click", () => {
+          document.body.classList.add("intro-open");
+
+          rotateFlowers(30, -30);
+        });
+      }
+
+      function resetPlayButtons() {
+        document
+          .querySelectorAll(".bottom-layer .play-btn-inner img")
+          .forEach((img) => {
+            img.src = "./assets/images/play-btn.png";
+          });
+
+        document
+          .querySelectorAll(".bottom-layer .play-btn-inner")
+          .forEach((inner) => {
+            inner.style.backgroundColor = "#FFAE3C";
+          });
+
+        if (box9) box9.classList.remove("active-video");
+        if (box10) box10.classList.remove("active-video");
+      }
+
+      function openPopupVideo(videoSrc, clickedBox = null) {
+        document.body.classList.add("video-open");
+        videoPopup.classList.add("active");
+
+        resetPlayButtons();
+
+        if (clickedBox) {
+          activeBox = clickedBox;
+          clickedBox.classList.add("active-video");
+
+          const clickedImg = clickedBox.querySelector(".play-btn-inner img");
+          const clickedInner = clickedBox.querySelector(".play-btn-inner");
+
+          if (clickedImg) clickedImg.src = "./assets/images/pause-btn.png";
+          if (clickedInner) clickedInner.style.backgroundColor = "#835EF4";
+        } else {
+          activeBox = null;
+        }
+
+        video.src = videoSrc;
+        video.load();
+        video.play();
+      }
+
+      function closeVideoPopup() {
+        document.body.classList.remove("video-open");
+
+        if (videoPopup) videoPopup.classList.remove("active");
+
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+          video.removeAttribute("src");
+          video.load();
+        }
+
+        resetPlayButtons();
+        activeBox = null;
+      }
+
+      function handlePlayClick(videoSrc, clickedBox) {
+        if (
+          videoPopup.classList.contains("active") &&
+          activeBox === clickedBox
+        ) {
+          closeVideoPopup();
+          return;
+        }
+
+        openPopupVideo(videoSrc, clickedBox);
+      }
+
+      if (box9) {
+        box9.querySelector(".play-btn-inner").addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handlePlayClick(videoSources.box9, box9);
+        });
+      }
+
+      if (box10) {
+        box10
+          .querySelector(".play-btn-inner")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handlePlayClick(videoSources.box10, box10);
+          });
+      }
+
+      if (closeVideo) {
+        closeVideo.addEventListener("click", closeVideoPopup);
+      }
+
+      const pujaBoxes = document.querySelectorAll(
+        ".left-container .box, .right-container .box",
+      );
+
+      function refreshLanguageText() {
+        const activeLangBtn = document.querySelector(
+          ".language-container div.active",
+        );
+
+        if (activeLangBtn) {
+          activeLangBtn.click();
+        }
+      }
+
+      pujaBoxes.forEach((box, index) => {
+        box.addEventListener("click", () => {
+          const number = index + 1;
+
+          pujaBoxes.forEach((item) => {
+            item.classList.remove("active-puja");
+          });
+
+          box.classList.add("active-puja");
+
+          if (number % 2 !== 0) {
+            rotateFlowers(30, -30);
+          } else {
+            rotateFlowers(-30, 30);
+          }
+
+          if (pageTitle) {
+            pageTitle.style.opacity = "0";
+          }
+
+          if (bottomLayer) {
+            bottomLayer.classList.add("hide-bottom");
+          }
+
+          if (pujaVideoBtn) {
+            pujaVideoBtn.classList.add("show");
+          }
+
+          if (pujaVideoBtnSpan) {
+            pujaVideoBtnSpan.setAttribute("data-lang-key", String(number));
+            refreshLanguageText();
+          }
+
+          if (circleVideo) {
+            currentCircleVideoSrc = `./assets/videos/${number}.mp4`;
+
+            circleVideo.src = currentCircleVideoSrc;
+            circleVideo.load();
+            circleVideo.play();
+            circleVideo.classList.add("show");
+          }
+        });
+      });
+
+      const pujaVideoPlayBtn = document.querySelector(
+        ".puja-video-btn .inner-layer",
+      );
+
+      if (pujaVideoPlayBtn) {
+        pujaVideoPlayBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (!currentCircleVideoSrc) return;
+
+          openPopupVideo(currentCircleVideoSrc);
+        });
+      }
+
+      if (pranamArrowBtn) {
+        pranamArrowBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = "pranam.html";
+        });
+      }
+
+      function resetAllTransitions() {
+        document.body.classList.remove("intro-open", "video-open");
+
+        pujaBoxes.forEach((box) => {
+          box.classList.remove("active-puja");
+        });
+
+        if (bottomLayer) {
+          bottomLayer.classList.remove("hide-bottom");
+        }
+
+        if (pageTitle) {
+          pageTitle.style.opacity = "1";
+        }
+
+        if (pujaVideoBtn) {
+          pujaVideoBtn.classList.remove("show");
+        }
+
+        if (pujaVideoBtnSpan) {
+          pujaVideoBtnSpan.removeAttribute("data-lang-key");
+          pujaVideoBtnSpan.textContent = "Puja";
+        }
+
+        if (circleVideo) {
+          circleVideo.pause();
+          circleVideo.currentTime = 0;
+          circleVideo.removeAttribute("src");
+          circleVideo.load();
+          circleVideo.classList.remove("show");
+        }
+
+        closeVideoPopup();
+        resetFlowerRotation();
+
+        currentCircleVideoSrc = "";
+      }
+
+      if (homeBtn) {
+        homeBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          resetAllTransitions();
+        });
+      }
+    </script>
+  </body>
+</html>
