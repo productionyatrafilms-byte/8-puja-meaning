@@ -1,6 +1,6 @@
 const data = {
   "English": {
-    "title": "8 Puja Meaning",
+    "title": "Ashtprakari Puja Ke Dohe",
     "pranam": "Pranam",
     "home": "Home",
     "num-1": "1",
@@ -34,7 +34,7 @@ const data = {
   },
 
   "Hindi": {
-    "title": "८ पूजा अर्थ",
+    "title": "अष्टप्रकारी पूजा के दोहे",
     "pranam": "प्रणाम",
     "home": "होम",
     "num-1": "१",
@@ -67,7 +67,7 @@ const data = {
   },
 
   "Gujarati": {
-    "title": "૮ પૂજાનો અર્થ",
+    "title": "અષ્ટપ્રકારી પૂજાના દુહા",
     "pranam": "પ્રણામ",
     "home": "ઘર",
     "num-1": "૧",
