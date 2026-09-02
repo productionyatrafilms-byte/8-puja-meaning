@@ -4,7 +4,9 @@ const btnGu = document.querySelector(".gujrati");
 
 const DEFAULT_LANG = "English";
 const STORAGE_KEY = "selectedLanguage";
-let translations = {};
+
+// translations come from assets/js/data.js, which must be loaded first
+let translations = typeof data !== "undefined" ? data : {};
 
 // set active button
 function setActiveButton(activeBtn) {
@@ -49,37 +51,104 @@ function isPageRefresh() {
   return performance.navigation.type === 1;
 }
 
+/* ===== click sound effects ===== */
+
+const AUDIO_PATH = "./assets/audio/";
+const popSound = new Audio(`${AUDIO_PATH}click.mp3`);
+const topicClickSound = new Audio(`${AUDIO_PATH}topic.mp3`);
+const langClickSounds = {
+  English: new Audio(`${AUDIO_PATH}Eng.mpeg`),
+  Hindi: new Audio(`${AUDIO_PATH}Hin.mpeg`),
+  Gujarati: new Audio(`${AUDIO_PATH}Guj.mpeg`),
+};
+
+[popSound, topicClickSound, ...Object.values(langClickSounds)].forEach((audio) => {
+  audio.preload = "auto";
+});
+
+function playSound(audio) {
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+}
+
+// play a sound, then follow the link once it finishes or this cap is hit
+function navigateWithSound(link, audio, maxWait) {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    e.preventDefault();
+
+    let navigated = false;
+    const go = () => {
+      if (navigated) return;
+      navigated = true;
+      window.location.href = href;
+    };
+
+    audio.currentTime = 0;
+    audio.addEventListener("ended", go, { once: true });
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(go);
+    }
+
+    setTimeout(go, maxWait);
+  });
+}
+
+function wireClickSounds() {
+  document.querySelectorAll(".home-btn, .back-btn, .home-btn-1").forEach((link) => {
+    if (link.tagName === "A" && link.getAttribute("href")) {
+      navigateWithSound(link, popSound, 600);
+    } else {
+      link.addEventListener("click", () => playSound(popSound));
+    }
+  });
+
+  document
+    .querySelectorAll(".left-container .box, .right-container .box")
+    .forEach((box) => {
+      box.addEventListener("click", () => playSound(topicClickSound));
+    });
+}
+
 // load language
 window.addEventListener("DOMContentLoaded", () => {
-  fetch("./assets/json/data.json")
-    .then((res) => res.json())
-    .then((data) => {
-      translations = data;
+  wireClickSounds();
 
-      let langToApply = DEFAULT_LANG;
-      const savedLang = localStorage.getItem(STORAGE_KEY);
+  let langToApply = DEFAULT_LANG;
+  const savedLang = localStorage.getItem(STORAGE_KEY);
 
-      if (isPageRefresh()) {
-        // on refresh always reset to English
-        langToApply = DEFAULT_LANG;
-        localStorage.setItem(STORAGE_KEY, DEFAULT_LANG);
-      } else {
-        // on normal page load / navigation keep selected language
-        langToApply = savedLang || DEFAULT_LANG;
-      }
+  if (isPageRefresh()) {
+    // on refresh always reset to English
+    langToApply = DEFAULT_LANG;
+    localStorage.setItem(STORAGE_KEY, DEFAULT_LANG);
+  } else {
+    // on normal page load / navigation keep selected language
+    langToApply = savedLang || DEFAULT_LANG;
+  }
 
-      applyLanguage(langToApply);
-    })
-    .catch((err) => console.error("Error loading translations:", err));
+  applyLanguage(langToApply);
 });
 
 // button clicks
 if (btnEn) {
-  btnEn.addEventListener("click", () => applyLanguage("English"));
+  btnEn.addEventListener("click", () => {
+    playSound(langClickSounds.English);
+    applyLanguage("English");
+  });
 }
 if (btnHi) {
-  btnHi.addEventListener("click", () => applyLanguage("Hindi"));
+  btnHi.addEventListener("click", () => {
+    playSound(langClickSounds.Hindi);
+    applyLanguage("Hindi");
+  });
 }
 if (btnGu) {
-  btnGu.addEventListener("click", () => applyLanguage("Gujarati"));
+  btnGu.addEventListener("click", () => {
+    playSound(langClickSounds.Gujarati);
+    applyLanguage("Gujarati");
+  });
 }

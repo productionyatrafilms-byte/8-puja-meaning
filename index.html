@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-lang-key="title"></title>
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css" />
   </head>
   <body>
     <a class="home-button home-btn" href="javascript:void(0)">
@@ -76,7 +73,10 @@
         <div class="box box-8">
           <span class="puja puja-8" data-lang-key="puja-8"></span>
           <span class="num num-8" data-lang-key="num-8"></span>
-          <i class="fa-solid fa-angles-right pranam-arrow-btn"></i>
+          <div class="pranam-arrow-btn">
+            <img src="./assets/images/arowAsset.png" alt="" />
+            <span data-lang-key="pranam"></span>
+          </div>
         </div>
       </div>
 
@@ -119,6 +119,8 @@
         <video controls playsinline></video>
       </div>
     </div>
+    <script src="./assets/js/djp.js"></script>
+    <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
     <script>
       const box9 = document.querySelector(".box-9");
@@ -137,6 +139,9 @@
       const pranamArrowBtn = document.querySelector(".pranam-arrow-btn");
       const homeBtn = document.querySelector(".home-btn");
 
+      const introClickSound = new Audio("./assets/audio/transition/2.mp3");
+      introClickSound.preload = "auto";
+
       const orangeFlower = document.querySelector(
         ".center-container .outer-layer",
       );
@@ -145,8 +150,8 @@
       );
 
       const videoSources = {
-        box9: "./assets/videos/chamar-puja.mp4",
-        box10: "./assets/videos/darpan-puja.mp4",
+        box9: "./assets/videos/ChamarPuja.mp4",
+        box10: "./assets/videos/Darpanpuja.mp4",
       };
 
       let activeBox = null;
@@ -182,6 +187,9 @@
 
       if (clickBtn) {
         clickBtn.addEventListener("click", () => {
+          introClickSound.currentTime = 0;
+          introClickSound.play().catch(() => {});
+
           document.body.classList.add("intro-open");
 
           rotateFlowers(30, -30);
@@ -284,13 +292,9 @@
       );
 
       function refreshLanguageText() {
-        const activeLangBtn = document.querySelector(
-          ".language-container div.active",
-        );
-
-        if (activeLangBtn) {
-          activeLangBtn.click();
-        }
+        // Reapply the current language directly (not via .click()) so this
+        // doesn't also replay the language-switch sound effect.
+        applyLanguage(localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG);
       }
 
       pujaBoxes.forEach((box, index) => {
