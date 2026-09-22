@@ -101,6 +101,16 @@
           </div>
           <span class="puja puja-10" data-lang-key="darpan-puja"></span>
         </div>
+        <div class="box box-11">
+          <div class="play-btn">
+            <div class="play-btn-outer">
+              <div class="play-btn-inner">
+                <img src="./assets/images/play-btn.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <span class="puja puja-11" data-lang-key="pankha-puja"></span>
+        </div>
       </div>
 
       <div class="puja-video-btn">
@@ -125,6 +135,7 @@
     <script>
       const box9 = document.querySelector(".box-9");
       const box10 = document.querySelector(".box-10");
+      const box11 = document.querySelector(".box-11");
 
       const videoPopup = document.querySelector(".video-popup");
       const closeVideo = document.querySelector(".video-close");
@@ -152,6 +163,7 @@
       const videoSources = {
         box9: "./assets/videos/ChamarPuja.mp4",
         box10: "./assets/videos/Darpanpuja.mp4",
+        box11: "./assets/videos/Pankhapuja.mp4",
       };
 
       let activeBox = null;
@@ -211,6 +223,7 @@
 
         if (box9) box9.classList.remove("active-video");
         if (box10) box10.classList.remove("active-video");
+        if (box11) box11.classList.remove("active-video");
       }
 
       function openPopupVideo(videoSrc, clickedBox = null) {
@@ -280,6 +293,16 @@
             e.preventDefault();
             e.stopPropagation();
             handlePlayClick(videoSources.box10, box10);
+          });
+      }
+
+      if (box11) {
+        box11
+          .querySelector(".play-btn-inner")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handlePlayClick(videoSources.box11, box11);
           });
       }
 

@@ -23,6 +23,7 @@ const data = {
     "puja-8": "Fal Puja",
     "chamar-puja": "Chamar Puja",
     "darpan-puja": "Darpan Puja",
+    "pankha-puja": "Pankha Puja",
     "1": "Jal Puja is a symbol of purity.",
     "2": "Chandan Puja is a symbol of equanimity.",
     "3": "A flower is a symbol of compassion.",
@@ -55,6 +56,9 @@ const data = {
     "puja-6": "अक्षत पूजा",
     "puja-7": "नैवेद्य पूजा",
     "puja-8": "फल पूजा",
+     "chamar-puja": "चामर पूजा",
+    "darpan-puja": "दर्पण पूजा",
+    "pankha-puja": "पंखा पूजा",
 
     "1": "जल पूजा पवित्रता का प्रतीक है।",
     "2": "चंदन पूजा समता का प्रतीक है।",
@@ -88,6 +92,9 @@ const data = {
     "puja-6": "અક્ષત પૂજા",
     "puja-7": "નૈવેદ્ય પૂજા",
     "puja-8": "ફળ પૂજા",
+     "chamar-puja": "ચામર પૂજા",
+    "darpan-puja": "દર્પણ પૂજા",
+    "pankha-puja": "પંખા પૂજા",
 
     "1": "જળપૂજા પવિત્રતાનું પ્રતિક છે.",
     "2": "ચંદન પૂજા સમતાનું પ્રતિક છે.",

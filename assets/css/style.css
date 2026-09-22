@@ -419,11 +419,11 @@ main .right-container {
   top: 92%;
   left: 50%;
   transform: translateX(-50%);
-  width: 40%;
+  width: 58%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3vw;
+  gap: 2vw;
   transition: opacity 0.5s ease;
   z-index: 1500;
 }
@@ -434,7 +434,8 @@ main .right-container {
 }
 
 .bottom-layer .box {
-  width: 50%;
+  width: 34%;
+  flex: 0 0 auto;
   height: 4vw;
   border: 0.2vw solid #FFAE3C;
   border-radius: 3vw;
@@ -452,11 +453,14 @@ main .right-container {
 }
 
 .box-9 .play-btn {
-  right: -3%;
-  transform: translateX(-505);
+  left: -3%;
 }
 
 .box-10 .play-btn {
+  left: -3%;
+}
+
+.box-11 .play-btn {
   left: -3%;
 }
 
@@ -475,16 +479,46 @@ main .right-container {
   cursor: pointer;
 }
 
-.bottom-layer .box-9 span {
+.bottom-layer .box-11 {
+  position: relative;
+  background: linear-gradient(90deg,
+      #ffffff 0%,
+      #FF6CB4 10%,
+      #8F23C0 100%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Left-aligned (not right or centered) starting right after the play button,
+   so the text's visual anchor point stays put across languages regardless
+   of translation length — right-aligned text only pins the far edge, and
+   centering left a big empty gap for shorter translations. Left padding
+   clears the play button, which overlaps the box's left edge (see
+   .box-9/.box-10/.box-11 .play-btn's negative left/right). */
+.bottom-layer .box-9 span,
+.bottom-layer .box-10 span,
+.bottom-layer .box-11 span {
+  padding: 0 1vw 0 6vw;
   text-align: left;
   color: white;
   transition: color 0.3s ease-in-out;
 }
 
-.bottom-layer .box-10 span {
-  text-align: right;
-  color: white;
-  transition: color 0.3s ease-in-out;
+/* Hindi/Gujarati translations render noticeably shorter/wider than the
+   English labels, so per user request these two languages center the text
+   instead of left-aligning it right after the play button. Padding is
+   also brought back down to near-symmetric here (instead of the 6vw left
+   clearance above) so centering happens across close to the full box —
+   centering within that wide left-padded area left a big empty gap between
+   the button and the start of the (short) translated text. */
+body[data-lang="hi"] .bottom-layer .box-9 span,
+body[data-lang="hi"] .bottom-layer .box-10 span,
+body[data-lang="hi"] .bottom-layer .box-11 span,
+body[data-lang="gu"] .bottom-layer .box-9 span,
+body[data-lang="gu"] .bottom-layer .box-10 span,
+body[data-lang="gu"] .bottom-layer .box-11 span {
+  padding: 0 1vw;
+  text-align: center;
 }
 
 
@@ -561,13 +595,15 @@ main .right-container {
 }
 
 .bottom-layer .box-9,
-.bottom-layer .box-10 {
+.bottom-layer .box-10,
+.bottom-layer .box-11 {
   transition: background 0.3s ease;
   cursor: pointer;
 }
 
 .bottom-layer .box-9:hover,
-.bottom-layer .box-10:hover {
+.bottom-layer .box-10:hover,
+.bottom-layer .box-11:hover {
   background: white !important;
 }
 
@@ -576,12 +612,14 @@ main .right-container {
 }
 
 .bottom-layer .box-9:hover .play-btn,
-.bottom-layer .box-10:hover .play-btn {
+.bottom-layer .box-10:hover .play-btn,
+.bottom-layer .box-11:hover .play-btn {
   transform: translateY(-50%) scale(1.16);
 }
 
 .bottom-layer .box-9:hover span,
-.bottom-layer .box-10:hover span {
+.bottom-layer .box-10:hover span,
+.bottom-layer .box-11:hover span {
   color: #FF1F8E
 }
 
@@ -596,12 +634,14 @@ body.video-open .right-container {
 
 
 .bottom-layer .box-9.active-video,
-.bottom-layer .box-10.active-video {
+.bottom-layer .box-10.active-video,
+.bottom-layer .box-11.active-video {
   background: white !important;
 }
 
 .bottom-layer .box-9.active-video span,
-.bottom-layer .box-10.active-video span {
+.bottom-layer .box-10.active-video span,
+.bottom-layer .box-11.active-video span {
   color: #ff1f8e;
 }
 
