@@ -1,9 +1,3 @@
-/* djp.js injects a close-button link in the top-right corner on every
-   page it runs on; not wanted here */
-.back-button {
-  display: none !important;
-}
-
 @font-face {
   font-family: "BalooRegular";
   src: url("../../fonts/Baloo Regular 400.ttf") format("truetype");
@@ -156,7 +150,7 @@ main {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -416,7 +410,7 @@ main .right-container {
 
 .bottom-layer {
   position: absolute;
-  top: 92%;
+  bottom: 3.5vh;
   left: 50%;
   transform: translateX(-50%);
   width: 58%;
@@ -727,7 +721,7 @@ body.video-open .bottom-layer .box:hover .play-btn {
 
 .puja-video-btn {
   position: absolute;
-  top: 90%;
+  bottom: 3.5vh;
   left: 50%;
   border-radius: 3vw;
   width: max-content;
