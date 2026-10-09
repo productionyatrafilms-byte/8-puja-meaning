@@ -219,6 +219,12 @@ main .center-container {
   opacity: 1;
 }
 
+/* enlarge from the top so the bottom of the frame falls outside the circle */
+.circle-video.crop-bottom {
+  transform: scale(1.36);
+  transform-origin: 50% 0;
+}
+
 .page-title {
   /* width: 50vw; */
   height: auto;

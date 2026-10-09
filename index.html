@@ -53,7 +53,7 @@
           <div class="page-title">
             <span data-lang-key="title"></span>
           </div>
-          <video class="circle-video" muted playsinline></video>
+          <video class="circle-video" muted loop playsinline></video>
         </div>
         <button class="click" data-lang-key="click">click</button>
       </div>
@@ -127,7 +127,7 @@
       <button class="video-close">×</button>
 
       <div class="video-box">
-        <video controls playsinline></video>
+        <video controls muted playsinline></video>
       </div>
     </div>
     <script src="./assets/js/djp.js"></script>
@@ -246,6 +246,7 @@
           activeBox = null;
         }
 
+        video.muted = true;
         video.src = videoSrc;
         video.load();
         video.play();
@@ -361,6 +362,8 @@
             circleVideo.load();
             circleVideo.play();
             circleVideo.classList.add("show");
+            // Pushpa puja (3): the clip has a drawn blue marker at the bottom, push it out of the circle
+            circleVideo.classList.toggle("crop-bottom", number === 3);
           }
         });
       });
@@ -417,7 +420,7 @@
           circleVideo.currentTime = 0;
           circleVideo.removeAttribute("src");
           circleVideo.load();
-          circleVideo.classList.remove("show");
+          circleVideo.classList.remove("show", "crop-bottom");
         }
 
         closeVideoPopup();
