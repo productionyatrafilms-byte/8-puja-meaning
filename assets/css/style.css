@@ -1155,3 +1155,10 @@ body[data-lang="gu"] .page-title span {
   font-size: 3.2vw;
   white-space: nowrap;
 }
+
+/* popup video is always muted: hide the volume / mute controls */
+.video-box video::-webkit-media-controls-mute-button,
+.video-box video::-webkit-media-controls-volume-slider,
+.video-box video::-webkit-media-controls-volume-slider-container {
+  display: none !important;
+}
