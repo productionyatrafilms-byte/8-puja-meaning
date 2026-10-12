@@ -130,6 +130,11 @@
         <video controls muted playsinline></video>
       </div>
     </div>
+    <!-- outside the transformed .right-container so left/bottom are measured from the screen -->
+    <div class="pranam-arrow-btn home-arrow-btn" aria-label="Home">
+      <img src="./assets/images/arowAsset.png" alt="" />
+    </div>
+
     <script src="./assets/js/djp.js"></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/app.js"></script>
@@ -148,7 +153,10 @@
       const pujaVideoBtnSpan = document.querySelector(".puja-video-btn span");
       const circleVideo = document.querySelector(".circle-video");
       const clickBtn = document.querySelector(".click");
-      const pranamArrowBtn = document.querySelector(".pranam-arrow-btn");
+      const pranamArrowBtn = document.querySelector(
+        ".pranam-arrow-btn:not(.home-arrow-btn)",
+      );
+      const homeArrowBtn = document.querySelector(".home-arrow-btn");
       const homeBtn = document.querySelector(".home-btn");
 
       const introClickSound = new Audio("./assets/audio/transition/2.mp3");
@@ -391,8 +399,28 @@
         });
       }
 
-      function resetAllTransitions() {
-        document.body.classList.remove("intro-open", "video-open");
+      // mirrored copy of the Pranam arrow on the left; goes back to the puja menu
+      if (homeArrowBtn) {
+        homeArrowBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          resetAllTransitions(true);
+        });
+        // not inside .box-8, so follow its active state instead of using a CSS descendant rule
+        const falPujaBox = document.querySelector(".box-8");
+        if (falPujaBox) {
+          const syncHomeArrow = () => {
+            homeArrowBtn.classList.toggle("is-visible", falPujaBox.classList.contains("active-puja"));
+          };
+          new MutationObserver(syncHomeArrow).observe(falPujaBox, { attributes: true, attributeFilter: ["class"] });
+          syncHomeArrow();
+        }
+      }
+
+      // keepIntro: stay on the opened puja menu (all boxes, title) instead of the Click screen
+      function resetAllTransitions(keepIntro = false) {
+        document.body.classList.remove("video-open");
+        if (!keepIntro) document.body.classList.remove("intro-open");
 
         pujaBoxes.forEach((box) => {
           box.classList.remove("active-puja");
@@ -425,6 +453,7 @@
 
         closeVideoPopup();
         resetFlowerRotation();
+        if (keepIntro) rotateFlowers(30, -30);
 
         currentCircleVideoSrc = "";
       }

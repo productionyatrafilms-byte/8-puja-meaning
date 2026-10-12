@@ -1162,3 +1162,23 @@ body[data-lang="gu"] .page-title span {
 .video-box video::-webkit-media-controls-volume-slider-container {
   display: none !important;
 }
+
+/* ===== Home arrow (mirror of the Pranam arrow) =====
+   A copy of the Pranam arrow with no label: same size, bottom level, pop animation, pointing
+   left. It lives directly under <body> (the Pranam arrow sits inside the transformed
+   .right-container), so left/bottom are measured from the screen. Shown by JS via .is-visible
+   while Fal Puja is active. Only the image is flipped. */
+.home-arrow-btn {
+  right: auto;
+  left: 5vw;
+}
+
+.home-arrow-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.home-arrow-btn img {
+  transform: scaleX(-1);
+}
